@@ -24,7 +24,7 @@ mkdir -p $ARCH_DIR
 rm -rf $ROOTFS_DIR
 mkdir -p $ROOTFS_DIR
 
-qemu-debootstrap --arch=$DEBOOTSTRAP_ARCH --variant=minbase --components=main,universe --include=sudo,dropbear,libgl1-mesa-glx,tightvncserver,xterm,xfonts-base,twm,expect bionic $ROOTFS_DIR
+qemu-debootstrap --arch=$DEBOOTSTRAP_ARCH --variant=minbase --components=main,universe --include=sudo,dropbear,libgl1-mesa-glx,tightvncserver,xterm,xfonts-base,twm,expect cosmic $ROOTFS_DIR
 
 echo "127.0.0.1 localhost" > $ROOTFS_DIR/etc/hosts
 echo "nameserver 8.8.8.8" > $ROOTFS_DIR/etc/resolv.conf
@@ -37,15 +37,15 @@ echo "export LIBGL_ALWAYS_SOFTWARE=1" >> $ROOTFS_DIR/etc/profile.d/userland.sh
 chmod +x $ROOTFS_DIR/etc/profile.d/userland.sh
 
 if [[ $1 = *"arm"* ]]; then
-   echo "deb http://ports.ubuntu.com/ubuntu-ports bionic main restricted universe multiverse" > $ROOTFS_DIR/etc/apt/sources.list
-   echo "deb http://ports.ubuntu.com/ubuntu-ports bionic-security main restricted universe multiverse" >> $ROOTFS_DIR/etc/apt/sources.list
-   echo "deb http://ports.ubuntu.com/ubuntu-ports bionic-updates main restricted universe multiverse" >> $ROOTFS_DIR/etc/apt/sources.list
-   echo "deb http://ports.ubuntu.com/ubuntu-ports bionic-backports main restricted universe multiverse" >> $ROOTFS_DIR/etc/apt/sources.list
+   echo "deb http://ports.ubuntu.com/ubuntu-ports cosmic main restricted universe multiverse" > $ROOTFS_DIR/etc/apt/sources.list
+   echo "deb http://ports.ubuntu.com/ubuntu-ports cosmic-security main restricted universe multiverse" >> $ROOTFS_DIR/etc/apt/sources.list
+   echo "deb http://ports.ubuntu.com/ubuntu-ports cosmic-updates main restricted universe multiverse" >> $ROOTFS_DIR/etc/apt/sources.list
+   echo "deb http://ports.ubuntu.com/ubuntu-ports cosmic-backports main restricted universe multiverse" >> $ROOTFS_DIR/etc/apt/sources.list
 else
-   echo "deb http://archive.ubuntu.com/ubuntu bionic main restricted universe multiverse" > $ROOTFS_DIR/etc/apt/sources.list
-   echo "deb http://archive.ubuntu.com/ubuntu bionic-security main restricted universe multiverse" >> $ROOTFS_DIR/etc/apt/sources.list
-   echo "deb http://archive.ubuntu.com/ubuntu bionic-updates main restricted universe multiverse" >> $ROOTFS_DIR/etc/apt/sources.list
-   echo "deb http://archive.ubuntu.com/ubuntu bionic-backports main restricted universe multiverse" >> $ROOTFS_DIR/etc/apt/sources.list
+   echo "deb http://archive.ubuntu.com/ubuntu cosmic main restricted universe multiverse" > $ROOTFS_DIR/etc/apt/sources.list
+   echo "deb http://archive.ubuntu.com/ubuntu cosmic-security main restricted universe multiverse" >> $ROOTFS_DIR/etc/apt/sources.list
+   echo "deb http://archive.ubuntu.com/ubuntu cosmic-updates main restricted universe multiverse" >> $ROOTFS_DIR/etc/apt/sources.list
+   echo "deb http://archive.ubuntu.com/ubuntu cosmic-backports main restricted universe multiverse" >> $ROOTFS_DIR/etc/apt/sources.list
 fi
 
 cp scripts/shrinkRootfs.sh $ROOTFS_DIR
